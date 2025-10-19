@@ -54,14 +54,14 @@ model.to(device)
 optimizer = optim.Adam(model.parameters(), lr=5e-5)
 criterion = nn.CrossEntropyLoss()
 
-epochs = 3  # enough for MNIST
+epochs = 3  
 for epoch in range(epochs):
     model.train()
     total_loss = 0
     for images, labels in train_loader:
         images, labels = images.to(device), labels.to(device)
 
-        # Use processor and avoid rescaling (images already in [0,1])
+        
         inputs = processor(images, return_tensors="pt", do_rescale=False).to(device)
         outputs = model(**inputs, labels=labels)
         loss = outputs.loss
